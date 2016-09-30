@@ -33,7 +33,7 @@ define("ADMIN_PROFILE_1h", "A program  működésével kapcsolatban semmifele ga
 define("ADMIN_PROFILE_1i", "Licensz:");
 define("ADMIN_PROFILE_1j", "Another Profiles Plugin licensz: GNU General Public License <a target='_blank' href='http://www.gnu.org/licenses/gpl.html'>http://www.gnu.org/licenses/gpl.html</a><br/>MP3 Player Maxi licensz: MPL 1.1 <a target='_blank' href='http://www.mozilla.org/MPL/'>http://www.mozilla.org/MPL/</a><br/>ClearBox licensz: Használatához el kell fogadnod a <a target='_blank' href='clearbox/clearbox.txt'>clearbox.txt</a> fájlban olvasható feltételeket.");
 define("ADMIN_PROFILE_1k", "Hiba bejelentés:");
-define("ADMIN_PROFILE_1l", "Ha hibát találnátok, itt jelenthetitek: <a target='_blank' href='https://github.com/yesszus/Another-profiles'>GitHub</a>.");
+define("ADMIN_PROFILE_1l", "Ha hibát találnátok, itt jelenthetitek: <a target='_blank' href='https://github.com/yesszus/Another-profiles/issues'>GitHub</a>.");
 define("ADMIN_PROFILE_1m", "Letöltés:");
 define("ADMIN_PROFILE_2", "Hozzászólások száma oldalanként");
 define("ADMIN_PROFILE_7", "A tagok profiljait megnézheti:");

@@ -125,7 +125,8 @@ if (isset($_GET['id'])) {
 	if ($user['user_image'] == "") {
 		$user_image = "".e_PLUGIN."another_profiles/images/noavatar.png";
 	//	$avatar .= "<img src='".$user_image."' border='1' ".$avwidth." ".$avheight." />";
-		$avatar .= "".$user_image."";
+		$avatar .= "{SETIMAGE: w=200&h=150&crop=1}".$user_image."";
+		
 	} else {
 		$user_image = $user['user_image'];
 		require_once(e_HANDLER."avatar_handler.php");
@@ -172,7 +173,7 @@ if (isset($_GET['id'])) {
 			$imageheight = $avheight;
 		}
 	//	$profil_image .= "<img src='".$user_image."' border='1' ".$imagewidth." ".$imageheight." />";
-		$profil_image .= "".$user_image."";
+		$profil_image .= "{SETIMAGE: w=120}{USER_AVATAR: shape=circle}";
 	}
 
 	$username = $user['user_name'];

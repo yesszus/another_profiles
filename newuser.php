@@ -125,14 +125,16 @@ if (isset($_GET['id'])) {
 	if ($user['user_image'] == "") {
 		$user_image = "".e_PLUGIN."another_profiles/images/noavatar.png";
 	//	$avatar .= "<img src='".$user_image."' border='1' ".$avwidth." ".$avheight." />";
-		$avatar .= "{SETIMAGE: w=200&h=150&crop=1}".$user_image."";
+	//	$avatar .= "".$user_image."";
+		$avatar .= "{SETIMAGE: w=120}{USER_AVATAR: shape=circle}";
 		
 	} else {
 		$user_image = $user['user_image'];
 		require_once(e_HANDLER."avatar_handler.php");
 		$user_image = avatar($user_image);
 	//	$avatar .= "<img src='".$user_image."' border='1' ".$avwidth." ".$avheight." />";
-		$avatar .= "".$user_image."";
+	//	$avatar .= "".$user_image."";
+		$avatar .= "{SETIMAGE: w=120}{USER_AVATAR: shape=circle}";
 	}
 
 
@@ -150,7 +152,8 @@ if (isset($_GET['id'])) {
 	if ($user['user_image'] == "") {
 		$user_image = "".e_PLUGIN."another_profiles/images/noavatar.png";
 	//	$profil_image .= "<img src='".$user_image."' border='1' ".$avwidth." ".$avheight." />";
-		$profil_image .= "".$user_image."";
+	//	$profil_image .= "".$user_image."";
+		$profil_image .= "{SETIMAGE: w=120}{USER_AVATAR: shape=circle}";
 	} else {
 		$user_image = str_replace("/thumbs/", "/", $user['user_image']);
 		$another_profiles_link = "".SITEURL.e_PLUGIN."another_profiles/";
@@ -685,12 +688,12 @@ if (isset($_GET['id'])) {
 						// GET COMMENTERS AVATAR
 						if($from[user_image] == "") {
 							$av = "".e_PLUGIN."another_profiles/images/noavatar.png";
-							$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'><img src='".$av."' border='1' ".$avwidth." ".$avheight."  alt='' /></a>";
+							$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'>{SETIMAGE: w=120}{USER_AVATAR: shape=circle}<!--<img src='".$av."' border='1' ".$avwidth." ".$avheight."  alt='' />--></a>";
 						} else {
 							$av = $from[user_image];
 							require_once(e_HANDLER."avatar_handler.php");
 							$av = avatar($av);
-							$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'><img src='".$av."' border='1' ".$avwidth." ".$avheight."  alt='' /></a>";
+							$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'>{SETIMAGE: w=120}{USER_AVATAR: shape=circle}<!--<img src='".$av."' border='1' ".$avwidth." ".$avheight."  alt='' />--></a>";
 						}
 						if ($pref['profile_user_warn_support'] == "Yes" AND $fromext['user_warn'] !='null' AND $fromext['user_warn'] !='') {
 							$text .= "<br/><img src=\"".THEME_ABS."images/warn/".$fromext['user_warn'].".png\">";
@@ -1124,12 +1127,12 @@ $text .= '</td>
 								// GET COMMENTERS AVATAR
 								if($from[user_image] == "") {
 									$av = "".e_PLUGIN."another_profiles/images/noavatar.png";
-									$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'><img src='".$av."' border='1' ".$avwidth." ".$avheight."  alt='' /></a>";
+									$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'>{SETIMAGE: w=120}{USER_AVATAR: shape=circle}<!--<img src='".$av."' border='1' ".$avwidth." ".$avheight."  alt='' />--></a>";
 								} else {
 									$av = $from[user_image];
 									require_once(e_HANDLER."avatar_handler.php");
 									$av = avatar($av);
-									$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'><img src='".$av."' border='1' ".$avwidth." ".$avheight."  alt='' /></a>";
+									$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'>{SETIMAGE: w=120}{USER_AVATAR: shape=circle}<!--<img src='".$av."' border='1' ".$avwidth." ".$avheight."  alt='' />--></a>";
 								}
 								if ($pref['profile_user_warn_support'] == "Yes" AND $fromext['user_warn'] !='null' AND $fromext['user_warn'] !='') {
 									$text .= "<br/><img src=\"".THEME_ABS."images/warn/".$fromext['user_warn'].".png\">";

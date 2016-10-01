@@ -27,7 +27,7 @@ global $ml_shortcodes;
 if ($pref['profile_memberlist_bcard'] == "line" || $pref['profile_memberlist_bcard'] == "" ) {
 	$ML_SHORT_TEMPLATE = "
 	<tr>".
-		($pref['profile_memberlist_column_avatar'] != "OFF" ? "<td class='forumheader3' style='width:2%'><center>{USER_AVATAR}<br>{USER_ID}".PROFILE_4b."{USER_SET_FRIEND_PIC}</center></td>" : "").
+		($pref['profile_memberlist_column_avatar'] != "OFF" ? "<td class='forumheader3' style='width:2%'><center>{USER_AVATAR: shape=circle}<!--{USER_AVATAR}--><br>{USER_ID}".PROFILE_4b."{USER_SET_FRIEND_PIC}</center></td>" : "").
 		($pref['profile_memberlist_column_online'] != "OFF" ? "<td class='forumheader'  style='width:20%'>{USER_ONLINE}{USER_WARN}<br>{USER_NAME_LINK}<br>{USER_LEVEL}<br>{USER_FORUMS}{USER_COMMENTS_1}{USER_COMMENTS}{USER_PIC}{USER_VID}{USER_MP3}</td>" : "").
 		($pref['profile_memberlist_column_realname'] == "ON" ? "<td class='forumheader3' style='width:20%'>{USER_REAL_NAME}</td>" : "").
 		($pref['profile_memberlist_column_loginname'] == "ON" && ADMIN && getperms("4") ? "<td class='forumheader3' style='width:20%'>{USER_LOGINNAME}</td>" : "").

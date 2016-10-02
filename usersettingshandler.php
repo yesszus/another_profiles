@@ -372,8 +372,8 @@ require_once("usersettings_1.0.2.php");
 require_once("usersettings_1.0.3.php");
 } else if ($e107info['e107_version'] == '1.0.4') {
 require_once("usersettings_1.0.4.php");
-} else if ($e107info['e107_version'] == '2.1.1') {
-require_once("usersettings_2.1.1.php");
+} else if ($e107info['e107_version'] == '2.0.0 (git)') {
+require_once("usersettings_2.0.0 (git).php");
 } else if ($e107info['e107_version'] == '2.1.2 (git)') {
 require_once("usersettings_2.1.2 (git).php");
 } else if ($e107info['e107_version'] == '2.1.2') {

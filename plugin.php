@@ -26,12 +26,12 @@ include_once(file_exists($lan_file) ? $lan_file : e_PLUGIN."another_profiles/lan
 
 // Plugin info
 $eplug_name = "Another Profiles";
-$eplug_version = "0.9.6.5";
+$eplug_version = "1.0.0";
 $eplug_author = "Super - Ampi";
 $eplug_logo = "images/logo.jpg";
 $eplug_url = "http://freedigital.hu";
 $eplug_email = "support@freedigital.hu";
-$eplug_description = PLUGIN_PROFILE_1;
+$eplug_description = AP_ADMIN_1;
 $eplug_compatible = "e107v0.7.11 ... e107v1.0.4";
 $eplug_readme = "";
 
@@ -155,7 +155,7 @@ $eplug_prefs = array(
 	"profile_indavideo" => 'ON'
 );
 
-if ($pref['plug_installed']['another_profiles'] != '0.9.4' || $pref['plug_installed']['another_profiles'] != '0.9.5' || $pref['plug_installed']['another_profiles'] != '0.9.6' || $pref['plug_installed']['another_profiles'] != '0.9.6.1' || $pref['plug_installed']['another_profiles'] != '0.9.6.2'|| $pref['plug_installed']['another_profiles'] != '0.9.6.3' || $pref['plug_installed']['another_profiles'] != '0.9.6.4') {
+if ($pref['plug_installed']['another_profiles'] != '0.9.4' || $pref['plug_installed']['another_profiles'] != '0.9.5' || $pref['plug_installed']['another_profiles'] != '0.9.6' || $pref['plug_installed']['another_profiles'] != '0.9.6.1' || $pref['plug_installed']['another_profiles'] != '0.9.6.2'|| $pref['plug_installed']['another_profiles'] != '0.9.6.3' || $pref['plug_installed']['another_profiles'] != '0.9.6.4'|| $pref['plug_installed']['another_profiles'] != '1.0.0') {
 	$upgrade_add_prefs = array (
 	"profile_videowidth" => '400',
 	"profile_youtube" => 'ON',

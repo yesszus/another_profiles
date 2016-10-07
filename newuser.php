@@ -1,30 +1,18 @@
 <?php
-/*
-+---------------------------------------------------------------+
-| Another Profiles Plugin v0.9.7
-| Copyright © 2008 Istvan Csonka
-| http://freedigital.hu
-| support@freedigital.hu
-|
-|        For the e107 website system
-|        ©Steve Dunstan
-|        http://e107.org
-|        jalist@e107.org
-|
-| (The original program is Alternate Profiles v2.0
-| boreded.co.uk)
-|
-| Another Profiles Plugin comes with
-| ABSOLUTELY NO WARRANTY
-| Released under the terms and conditions of the
-| GNU General Public License (http://gnu.org).
-+---------------------------------------------------------------+
-*/
+
 if(!defined("e107_INIT")) {
 	require_once("../../class2.php");
 } 
+
+///////
+require_once(e_HANDLER."form_handler.php");
+require_once(e_HANDLER."comment_class.php");
+$user_shortcodes = e107::getScBatch('user');
+///////
+
+
 //e107_0.8 compatible 
-if(file_exists(e_FILE."shortcode/batch/user_shortcodes.php")){
+ if(file_exists(e_FILE."shortcode/batch/user_shortcodes.php")){
 	require_once(e_FILE."shortcode/batch/user_shortcodes.php");
 } else {
 	require_once(e_CORE."shortcodes/batch/user_shortcodes.php");
@@ -48,7 +36,8 @@ if ($_GET['page'] == videos) {
 $e_wysiwyg = "user_video_comment";
 }
 require_once(HEADERF);
-global $user_shortcodes, $pref;
+//global $user_shortcodes, $pref;
+global $user_shortcodes, $pref, $user;
 
 $alert_icon = "<img src='images/alert.png' title='!' />";
 
@@ -186,7 +175,8 @@ if (isset($_GET['id'])) {
 	$EXTENDED_CATEGORY_TABLE = "
 		<tr><td class='forumheader3'>{EXTENDED_ICON}&nbsp;{EXTENDED_NAME}</td><td class='forumheader3'>{EXTENDED_VALUE}</td></tr>
 		";
-	$EXTENDED_END = "";
+	$EXTENDED_END = ""; 
+	
 	$sc_style['USER_COMMENTS_LINK']['pre'] = "<tr><td colspan='2' class='forumheader3' style='text-align:left'>";
 	$sc_style['USER_COMMENTS_LINK']['post'] = "</td></tr>";
 	$sc_style['USER_FORUM_LINK']['pre'] = "<tr><td colspan='2' class='forumheader3' style='text-align:left'>";
@@ -209,7 +199,7 @@ if (isset($_GET['id'])) {
 	// MENU
 	$text .="<div class='main_caption'><b>{$username} ".PROFILE_162."</div></b>";
 	$text .= "<div style='text-align:center'>";
-	$text .= "<table style='width:100%' class='fborder'>";
+	$text .= "<table style='".USER_WIDTH."' class='fborder table'>";
 	$text .= "<tr>";
 	$text .= "<td colspan='2' style='text-align:center'>";
 	$text .= "| <a href='newuser.php?id=".$id."'>".PROFILE_11."</a> | ";
@@ -346,7 +336,7 @@ if (isset($_GET['id'])) {
 
 	if(!isset($_GET['add'])) {
 		if ($_GET['page'] == "") {
-			$text .= "<br/><table width='100%' class='fborder'>";
+			$text .= "<br/><table style='".USER_WIDTH."' class='fborder table'>";
 			$text .= "<TR><td style='width:25%'></td></TR>";
 			$text .= "{USER_EXTENDED_ALL}";
 			$text .= "</table>";
@@ -463,9 +453,9 @@ if (isset($_GET['id'])) {
 				$friend = explode("|", $list['user_friends']);
 				$num = count($friend) - 2;
 				if ($list['user_friends'] == '' or $list['user_friends'] == '|') {
-					$text .= "<br><table width='100%' class='fborder'><tr><td class='forumheader' colspan='4'><img src='images/friends.png'>&nbsp;<i>".PROFILE_30."</i></td></tr></table>";
+					$text .= "<br><table style='".USER_WIDTH."' class='fborder table'><tr><td class='fborder table' colspan='4'><img src='images/friends.png'>&nbsp;<i>".PROFILE_30."</i></td></tr></table>";
 				} else {
-					$text .= "<br><table width='100%' class='fborder'><tr><td class='forumheader' colspan='4'><img src='images/friends.png'>&nbsp;<i>".$num." " .PROFILE_31." </i></td></tr></table>";
+					$text .= "<br><table style='".USER_WIDTH."' class='fborder table'><tr><td class='fborder table' colspan='4'><img src='images/friends.png'>&nbsp;<i>".$num." " .PROFILE_31." </i></td></tr></table>";
 					$text .= "<table width='100%'>";
 					$column = 1;
 					foreach ($friend as $fr) {
@@ -502,7 +492,8 @@ if (isset($_GET['id'])) {
 							$user_image = $name[user_image];
 							require_once(e_HANDLER."avatar_handler.php");
 							$user_image = avatar($user_image);
-							$text .= "<img src='".$user_image."' border='1' width='64' alt='' />";
+						//	$text .= "<img src='".$user_image."' border='1' width='64' alt='' />";
+							$text .= "{SETIMAGE: w=120}{USER_AVATAR: shape=circle}";
 						}
 						$text .= "<br/></a>".$online." ".$name['user_name']."</div></td>";
 						$column++;
@@ -512,7 +503,7 @@ if (isset($_GET['id'])) {
 						}
 					}
 					$text .= "</table>";
-					$text .= "<br/><table width='100%' ><tr><td class='forumheader' colspan='3' ><div class='smallblacktext'><a href='".e_SELF."?".e_QUERY."#top' onclick=\"window.scrollTo(0,0);\">".PROFILE_271."</a></div></td></tr></table>";
+					$text .= "<br/><table style='".USER_WIDTH."' class='fborder table'><tr><td class='fborder table' colspan='3' ><div class='smallblacktext'><a href='".e_SELF."?".e_QUERY."#top' onclick=\"window.scrollTo(0,0);\">".PROFILE_271."</a></div></td></tr></table>";
 				}
 			}
 
@@ -622,12 +613,12 @@ if (isset($_GET['id'])) {
 						$maxpcomment = 100;
 					}
 				if ($comm == 0) {
-					$text .= "<br><table width='100%' class='fborder'><tr><td class='forumheader' colspan='4'><img src='images/comments.png'><i>".PROFILE_32."</i></td></tr></table>";
+					$text .= "<br><table style='".USER_WIDTH."' class='fborder table'><tr><td class='fborder table' colspan='4'><img src='images/comments.png'><i>".PROFILE_32."</i></td></tr></table>";
 				} else {
-					$text .= "<br><table width='100%' class='fborder'>
+					$text .= "<br><table style='".USER_WIDTH."' class='fborder table'>
 
 						<tr>
-							<td style='width:20%; text-align:left' class='forumheader' colspan='2'><img src='images/comments.png'><i>".PROFILE_36a." (".$comnumrows."):</i></td>";
+							<td style='width:20%; text-align:left' class='fborder table' colspan='2'><img src='images/comments.png'><i>".PROFILE_36a." (".$comnumrows."):</i></td>";
 							if ($comment_order == DESC) {
 							$text .= "<td style='width:80%; text-align:right' class='forumheader' colspan='2'>".PROFILE_256."&nbsp;&nbsp;<a href=\"$self?id=".$id."&page=comments&comment_order=ASC\"><img src='images/order_down.png' title='".PROFILE_310."'></a></td>";
 							} else {
@@ -642,7 +633,7 @@ if (isset($_GET['id'])) {
 						$com = $sql->db_Fetch();
 						$from = mysql_query("SELECT * FROM ".MPREFIX."user WHERE user_id=".$com['com_by']." ");
 						$from = mysql_fetch_assoc($from);
-						$date = date("Y-m-j. H:i", $com['com_date']);
+						$date = date("Y m d - H:i", $com['com_date']);
 						$comid = $com['com_id'];
 						$user_name = $from['user_name'];
 						$on_name = "".$com['com_by'].".".$user_name."";
@@ -674,7 +665,7 @@ if (isset($_GET['id'])) {
 							$online = "";
 						}
 						unset($checkonline,$on_name);
-						$text .= "<br><table width='100%' class='fborder'>
+						$text .= "<br><table style='".USER_WIDTH."' class='fborder table'>
 						<tr>
 							<td style='width:20%; text-align:left' class='fcaption'>".PROFILE_268."".$from['user_name']."</td>
 							<td style='width:60%; text-align:left' class='fcaption'>".PROFILE_269."</td>
@@ -688,17 +679,17 @@ if (isset($_GET['id'])) {
 						// GET COMMENTERS AVATAR
 						if($from[user_image] == "") {
 							$av = "".e_PLUGIN."another_profiles/images/noavatar.png";
-							$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'>{SETIMAGE: w=120}{USER_AVATAR: shape=circle}<!--<img src='".$av."' border='1' ".$avwidth." ".$avheight."  alt='' />--></a>";
+							$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'>{SETIMAGE: w=120}{USER_AVATAR: shape=circle}</a>";
 						} else {
 							$av = $from[user_image];
 							require_once(e_HANDLER."avatar_handler.php");
 							$av = avatar($av);
-							$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'>{SETIMAGE: w=120}{USER_AVATAR: shape=circle}<!--<img src='".$av."' border='1' ".$avwidth." ".$avheight."  alt='' />--></a>";
+							$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'>{SETIMAGE: w=120}{USER_AVATAR: shape=circle}</a>";
 						}
 						if ($pref['profile_user_warn_support'] == "Yes" AND $fromext['user_warn'] !='null' AND $fromext['user_warn'] !='') {
 							$text .= "<br/><img src=\"".THEME_ABS."images/warn/".$fromext['user_warn'].".png\">";
 						}
-						$text .= "<br/>$from_level<br/><div class='smallblacktext'>".PROFILE_270."$from_join<br/>".PROFILE_272.$fromext['user_location']."</div></td>";
+						$text .= "<br/>$from_level<br/><div class='smallblacktext'>".PROFILE_270."<br/>$from_join<br/>".PROFILE_272.$fromext['user_location']."</div></td>";
 						$message = $tp -> toHTML($com['com_message'], true, 'parse_sc, constants');
 						$text .= "<td class='forumheader3' colspan='2' style='vertical-align: top;'>".$message."<hr width='80%' align='left' size='1' noshade ='noshade'>$from_signature</td></tr>";
 						$text .= "<tr><td class='forumheader'><div class='smallblacktext'><a href='".e_SELF."?".e_QUERY."#header' onclick=\"window.scrollTo(0,0);\">".PROFILE_271."</a></div></td>";
@@ -725,7 +716,7 @@ if (isset($_GET['id'])) {
 							$vtomessage = "[blockquote]".PROFILE_279."".$vtoname." #".$vtoid."".PROFILE_280."[/blockquote]";
 						}
 						$text .= "<a name='newprofilecomment'></a>";
-						$text .= "<form method='post' action='formhandler.php'><table width='100%'><tr><td class='forumheader' style='vertical-align: middle;' /><img src='images/post1.png'>&nbsp;&nbsp;<b>".PROFILE_33."</b></td>";
+						$text .= "<form method='post' action='formhandler.php'><table style='".USER_WIDTH."' class='fborder table'><tr><td class='forumheader' style='vertical-align: middle;' /><img src='images/post1.png'>&nbsp;&nbsp;<b>".PROFILE_33."</b></td>";
 						if (!e_WYSIWYG) {
 							require_once(e_HANDLER."ren_help.php");
 						}
@@ -760,7 +751,7 @@ if (isset($_GET['id'])) {
 						}
 
 					} else {
-						$text .= "<table width='100%'><tr><td><div class='forumheader'>".PROFILE_237." ($maxpcomment".PROFILE_236.").</div>";
+						$text .= "<table style='".USER_WIDTH."' class='fborder table'><tr><td><div class='forumheader'>".PROFILE_237." ($maxpcomment".PROFILE_236.").</div>";
 					}
 					$text .= "</td></tr></table></form>";
 				}
@@ -812,16 +803,16 @@ if (isset($_GET['id'])) {
 				$kepekszama = countpicFiles($picdir);
 				if(file_exists($picthumbdir)){
 					if ($kepekszama < 3) {
-						$text .= "<br><table width='100%' class='fborder'><tr><td class='forumheader' colspan='4'><img src='images/images.png'><i>".PROFILE_163."</i></td></tr></table>";
+						$text .= "<br><table style='".USER_WIDTH."' class='fborder table'><tr><td class='forumheader' colspan='4'><img src='images/images.png'><i>".PROFILE_163."</i></td></tr></table>";
 					} else {
-						$text .= "<br><table width='100%' class='fborder'><tr><td class='forumheader' colspan='4'><img src='images/images.png'><i>".PROFILE_14a."</i></td></tr></table><br>";
+						$text .= "<br><table style='".USER_WIDTH."' class='fborder table'><tr><td class='fborder table' colspan='4'><img src='images/images.png'><i>".PROFILE_14a."</i></td></tr></table><br>";
 					}
 				}
 				if(!file_exists($picthumbdir)){
 					if ($kepekszama < 2) {
-						$text .= "<br><table width='100%' class='fborder'><tr><td class='forumheader' colspan='4'><img src='images/images.png'><i>".PROFILE_163."</i></td></tr></table>";
+						$text .= "<br><table style='".USER_WIDTH."' class='fborder table'><tr><td class='forumheader' colspan='4'><img src='images/images.png'><i>".PROFILE_163."</i></td></tr></table>";
 					} else {
-						$text .= "<br><table width='100%' class='fborder'><tr><td class='forumheader' colspan='4'><img src='images/images.png'><i>".PROFILE_14a."</i></td></tr></table><br>";
+						$text .= "<br><table style='".USER_WIDTH."' class='fborder table'><tr><td class='fborder table' colspan='4'><img src='images/images.png'><i>".PROFILE_14a."</i></td></tr></table><br>";
 					}
 				}
 				if (isset($_GET['album']) && isset($_GET['pic'])) {
@@ -1065,9 +1056,9 @@ $text .= '</td>
 						if ($piccomm == 0) {
 							$text .= "<br/><br/><i>".PROFILE_36."</i>";
 						} else {
-						$text .= "<br><table width='100%' class='fborder'>
+						$text .= "<br><table style='".USER_WIDTH."' class='fborder table'>
 								<tr>
-									<td style='width:20%; text-align:left' class='forumheader' colspan='2'><img src='images/comments.png'><i>".PROFILE_36a." (".$picnumrows."):</i></td>";
+									<td style='width:20%; text-align:left' class='fborder table' colspan='2'><img src='images/comments.png'><i>".PROFILE_36a." (".$picnumrows."):</i></td>";
 									if ($comment_order == DESC) {
 										$text .= "<td style='width:80%; text-align:right' class='forumheader' colspan='2'>".PROFILE_256."&nbsp;&nbsp;<a href=\"$self?id=".$id."&page=images&album=".$_GET['album']."&pic=".$_GET['pic']."&comment_order=ASC\"><img src='images/order_down.png' title='".PROFILE_310."'></a></td>";
 									} else {
@@ -1081,7 +1072,7 @@ $text .= '</td>
 								$com = $sql->db_Fetch();
 								$from = mysql_query("SELECT * FROM ".MPREFIX."user WHERE user_id=".$com['com_by']." ");
 								$from = mysql_fetch_assoc($from);
-								$date = date("Y-m-j. H:i", $com['com_date']);
+								$date = date("Y m d - H:i", $com['com_date']);
 								$comid = $com['com_id'];
 								$user_name = $from['user_name'];
 								$on_name = "".$com['com_by'].".".$user_name."";
@@ -1113,7 +1104,7 @@ $text .= '</td>
 									$online = "";
 								}
 								unset($checkonline,$on_name);
-								$text .= "<br><table width='100%' class='fborder'>
+								$text .= "<br><table style='".USER_WIDTH."' class='fborder table'>
 								<tr>
 									<td style='width:20%; text-align:left' class='fcaption'>".PROFILE_268."".$from['user_name']."</td>
 									<td style='width:60%; text-align:left' class='fcaption'>".PROFILE_269."</td>
@@ -1127,12 +1118,12 @@ $text .= '</td>
 								// GET COMMENTERS AVATAR
 								if($from[user_image] == "") {
 									$av = "".e_PLUGIN."another_profiles/images/noavatar.png";
-									$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'>{SETIMAGE: w=120}{USER_AVATAR: shape=circle}<!--<img src='".$av."' border='1' ".$avwidth." ".$avheight."  alt='' />--></a>";
+									$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'>{SETIMAGE: w=120}{USER_AVATAR: shape=circle}</a>";
 								} else {
 									$av = $from[user_image];
 									require_once(e_HANDLER."avatar_handler.php");
 									$av = avatar($av);
-									$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'>{SETIMAGE: w=120}{USER_AVATAR: shape=circle}<!--<img src='".$av."' border='1' ".$avwidth." ".$avheight."  alt='' />--></a>";
+									$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'>{SETIMAGE: w=120}{USER_AVATAR: shape=circle}</a>";
 								}
 								if ($pref['profile_user_warn_support'] == "Yes" AND $fromext['user_warn'] !='null' AND $fromext['user_warn'] !='') {
 									$text .= "<br/><img src=\"".THEME_ABS."images/warn/".$fromext['user_warn'].".png\">";
@@ -1163,7 +1154,7 @@ $text .= '</td>
 									$vtomessage = "[blockquote]".PROFILE_279."".$vtoname." #".$vtoid."".PROFILE_280."[/blockquote]";
 								}
 								$text .= "<a name='newprofilecomment'></a>";
-								$text .= "<form method='post' action='formhandler.php'><table width='100%'><tr><td class='forumheader' style='vertical-align: middle;' /><img src='images/post1.png'>&nbsp;&nbsp;<b>".PROFILE_33."</b></td>";
+								$text .= "<form method='post' action='formhandler.php'><table style='".USER_WIDTH."' class='fborder table'><tr><td class='forumheader' style='vertical-align: middle;' /><img src='images/post1.png'>&nbsp;&nbsp;<b>".PROFILE_33."</b></td>";
 								if (!e_WYSIWYG) {
 									require_once(e_HANDLER."ren_help.php");
 								}
@@ -1246,7 +1237,7 @@ $file = $one_file['name'];
 if (e_LANGUAGE == "English") {
 		$ft = date ('F j, Y  H:i', $one_file['mtime']);
 } else {
-		$ft = date("Y. m. j. H:i", $one_file['mtime']);
+		$ft = date("Y m j - H:i", $one_file['mtime']);
 }
 
 									$pos = strrpos($file, '.');
@@ -1301,7 +1292,7 @@ if (e_LANGUAGE == "English") {
 //								closedir($dirHandle);
 }
 								$text .= "</table>";
-							$text .= "<br/><table width='100%' ><tr><td class='forumheader' colspan='3' ><div class='smallblacktext'><a href='".e_SELF."?".e_QUERY."#top' onclick=\"window.scrollTo(0,0);\">".PROFILE_271."</a></div></td></tr></table>";
+							$text .= "<br/><table style='".USER_WIDTH."' class='fborder table'><tr><td class='fborder table' colspan='3' ><div class='smallblacktext'><a href='".e_SELF."?".e_QUERY."#top' onclick=\"window.scrollTo(0,0);\">".PROFILE_271."</a></div></td></tr></table>";
 							}
 						} else {
 							$text .= "<i>".PROFILE_123."</i>";
@@ -1325,7 +1316,7 @@ if ($pref['profile_userpic_order'] == 'ASC' || $pref['profile_userpic_order'] ==
 
 //					}
 
-					$text .= "<table width='100%'><tr>"; // <br/><br/>
+					$text .= "<table style='".USER_WIDTH."' class='fborder table'><tr>"; // <br/><br/>
 //					if ($handle = opendir($dir)) {
 						$col = 0;
 						$piccol = 0;
@@ -1346,7 +1337,7 @@ $file = $one_file['name'];
 if (e_LANGUAGE == "English") {
 		$ft = date ('F j, Y  H:i', $one_file['mtime']);
 } else {
-		$ft = date("Y. m. j. H:i", $one_file['mtime']);
+		$ft = date("Y m d - H:i", $one_file['mtime']);
 }
 
 							if ($file != "." && $file != ".." && $file != "Thumbs.db" && $file != "thumbs" && substr(strrchr($file, '.'), 1) != "txt" && substr(strrchr($file, '.'), 1) != "htm" ) {
@@ -1434,7 +1425,7 @@ if (e_LANGUAGE == "English") {
 					$text .= "</tr><tr>".$pic."</tr></table>";
 
 					if ($kepekszama > 2) {
-						$text .= "<br/><table width='100%' ><tr><td class='forumheader' colspan='3' ><div class='smallblacktext'><a href='".e_SELF."?".e_QUERY."#top' onclick=\"window.scrollTo(0,0);\">".PROFILE_271."</a></div></td></tr></table>";
+						$text .= "<br/><table style='".USER_WIDTH."' class='fborder table'><tr><td class='fborder table' colspan='3' ><div class='smallblacktext'><a href='".e_SELF."?".e_QUERY."#top' onclick=\"window.scrollTo(0,0);\">".PROFILE_271."</a></div></td></tr></table>";
 					}
 				}
 			}

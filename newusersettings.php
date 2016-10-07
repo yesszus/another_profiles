@@ -1,25 +1,5 @@
 <?php
-/*
-+---------------------------------------------------------------+
-| Another Profiles Plugin v0.9.6
-| Copyright © 2008 Istvan Csonka
-| http://freedigital.hu
-| support@freedigital.hu
-|
-|        For the e107 website system
-|        ©Steve Dunstan
-|        http://e107.org
-|        jalist@e107.org
-|
-| (The original program is Alternate Profiles v2.0
-| boreded.co.uk)
-|
-| Another Profiles Plugin comes with
-| ABSOLUTELY NO WARRANTY
-| Released under the terms and conditions of the
-| GNU General Public License (http://gnu.org).
-+---------------------------------------------------------------+
-*/
+
 if(!defined("e107_INIT")) {
 	require_once("../../class2.php");
 }
@@ -220,7 +200,7 @@ if ($pref['profile_mp3enabled'] != "ON") {$image_rowspan --;}
 if ($pref['profile_commentson'] != "ON") {$image_rowspan --;}
 
 $text .="<div class='main_caption'><b>".PROFILE_46."</div></b><br/>";
-$text .="<table style='width:100%' class='fborder'>";
+$text .="<table style='".USER_WIDTH."' class='fborder table'>";
 $text .="<tr><td colspan='3'><br></td></tr>";
 $text .="<tr><td colspan='3' class='fcaption' style='text-align:center'>".$id." {USER_ID}".PROFILE_169."".$username."{USER_NAME}</td></tr>";
 $text .="<tr><td rowspan=$image_rowspan width='30%' class='forumheader3'><center>{$profil_image}<br>".$username."</center></td></tr>";
@@ -342,7 +322,7 @@ if (isset($_GET['page'])) {
 			} else {
 				$frcolumn = $pref['profile_frcol'];
 			}
-			$text .= "<table width='100%'><tr><td class='forumheader'><img src='images/friends.png'>&nbsp;".PROFILE_60."</td></tr></table>";
+			$text .= "<table style='".USER_WIDTH."' class='fborder table'><tr><td class='forumheader'><img src='images/friends.png'>&nbsp;".PROFILE_60."</td></tr></table>";
 			$sql->mySQLresult = @mysql_query("SELECT user_id, user_friends, user_friends_request FROM ".MPREFIX."another_profiles WHERE user_id='".$id."' ");
 			$list = $sql->db_Fetch();
 			if (isset($_GET['acceptadd'])) {
@@ -420,7 +400,7 @@ if (isset($_GET['page'])) {
 							$user_image = $frname[user_image];
 							require_once(e_HANDLER."avatar_handler.php");
 							$user_image = avatar($user_image);
-							$text .= "<img src='".$user_image."' border='1' width='64' alt='' />";
+							$text .= "{SETIMAGE: w=120}{USER_AVATAR: shape=circle}";
 						}
 						$text .= "</a></td><td class='forumheader3'>".$online." <b>".$frname['user_name']."</b><br/><br/><a href='newusersettings.php?page=friends".$luid."&acceptadd=".$req."'>".PROFILE_66."</a> | <a href='newusersettings.php?page=friends".$uid."&rejectadd=".$req."'>".PROFILE_67."</a></td>";
 						$column++;
@@ -471,7 +451,7 @@ if (isset($_GET['page'])) {
 						$user_image = $name[user_image];
 						require_once(e_HANDLER."avatar_handler.php");
 						$user_image = avatar($user_image);
-						$text .= "<img src='".$user_image."' border='1' width='64' alt='' />";
+						$text .= "{SETIMAGE: w=120}{USER_AVATAR: shape=circle}";
 					}
 					$text .= "<br/></a><input type='hidden' name='uid' value='".$id."'><input type='checkbox' name='box[]' value='".$fr."'> ".$name['user_name']." ".$online."</td>";
 					$column++;
@@ -522,7 +502,7 @@ if (isset($_GET['page'])) {
 							$user_image = $name[user_image];
 							require_once(e_HANDLER."avatar_handler.php");
 							$user_image = avatar($user_image);
-							$text .= "<img src='".$user_image."' border='1' width='64' alt='' />";
+							$text .= "{SETIMAGE: w=120}{USER_AVATAR: shape=circle}";
 						}
 						$text .= "<br/></a><input type='hidden' name='uid' value='".$id."'><input type='checkbox' name='boxfr[]' value='".$fr."'> ".$name['user_name']." ".$online."</td>";
 						$column++;
@@ -541,7 +521,7 @@ if (isset($_GET['page'])) {
 		}
 
 	} elseif ($_GET['page'] == "settings") {
-		$text .= "<table width='100%'><tr><td class='forumheader'><img src='images/settings.png'>&nbsp;".PROFILE_141a."</td></tr></table>";
+		$text .= "<table style='".USER_WIDTH."' class='fborder table'><tr><td class='forumheader'><img src='images/settings.png'>&nbsp;".PROFILE_141a."</td></tr></table>";
 		$sql->mySQLresult = @mysql_query("SELECT user_settings FROM ".MPREFIX."another_profiles WHERE user_id='".$id."' ");
 		$settings = $sql->db_Fetch();
 		$break = explode("|",$settings['user_settings']);
@@ -594,7 +574,7 @@ if (isset($_GET['page'])) {
 			}
 		}
 		// Beállítások
-		$text .= "<table style='width:100%'>";
+		$text .= "<table style='".USER_WIDTH."' class='fborder table'>";
 		$text .= "<form method='POST' action='formhandler.php'>";
 		$text .= "<tr>";
 		$text .= "<td class='forumheader3' style='vertical-align: top;'>";
@@ -757,7 +737,7 @@ if (isset($_GET['page'])) {
 				$text .= "<br/><i>".PROFILE_68."</i>";
 			} else {
 				$text .= "<br/><form action='formhandler.php' method='post'>";
-				$text .= "<table width='100%' class='fborder'><tr><td class='forumheader' colspan='4'><i>".PROFILE_62." (".$comnumrows."):</i></td></tr></table>";
+				$text .= "<table style='".USER_WIDTH."' class='fborder table'><tr><td class='fborder table' colspan='4'><i>".PROFILE_62." (".$comnumrows."):</i></td></tr></table>";
 				//Profil hozzászólások listája indul
 				for ($i = 0; $i < $comm; $i++) {
 				$com = $sql->db_Fetch();
@@ -794,13 +774,13 @@ if (isset($_GET['page'])) {
 					$online = "";
 				}
 				unset($checkonline,$on_name);
-				$date = date("Y.m.d.   H:i", $com['com_date']);
+				$date = date("Y m d - H:i", $com['com_date']);
 				if ($com['com_date'] >= $userlastvisit) {
 					$newcom = "<font color='#FF0000'>".PROFILE_200."</font>";
 				} else {
 					$newcom = "";
 				}
-				$text .= "<br><table width='100%' class='fborder'>
+				$text .= "<br><table style='".USER_WIDTH."' class='fborder table'>
 					<tr>
 						<td style='width:20%; text-align:left' class='fcaption'>".PROFILE_268."".$from['user_name']."</td>
 						<td style='width:60%; text-align:left' class='fcaption'>".PROFILE_269."</td>
@@ -813,17 +793,17 @@ if (isset($_GET['page'])) {
 				// GET COMMENTERS AVATAR
 				if($from[user_image] == "") {
 					$av = "".e_PLUGIN."another_profiles/images/noavatar.png";
-					$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'><img src='".$av."' border='1' ".$avwidth." ".$avheight."  alt='' /></a>";
+					$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'>{SETIMAGE: w=120}{USER_AVATAR: shape=circle}</a>";
 				} else {
 					$av = $from[user_image];
 					require_once(e_HANDLER."avatar_handler.php");
 					$av = avatar($av);
-					$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'><img src='".$av."' border='1' ".$avwidth." ".$avheight."  alt='' /></a>";
+					$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'>{SETIMAGE: w=120}{USER_AVATAR: shape=circle}</a>";
 				}
 				if ($pref['profile_user_warn_support'] == "Yes" AND $fromext['user_warn'] !='null' AND $fromext['user_warn'] !='') {
 					$text .= "<br/><img src=\"".THEME_ABS."images/warn/".$fromext['user_warn'].".png\">";
 				}
-				$text .= "<br/>$from_level<br/><div class='smallblacktext'>".PROFILE_270."$from_join<br/>".PROFILE_272.$fromext['user_location']."</div></td>";
+				$text .= "<br/>$from_level<br/><div class='smallblacktext'>".PROFILE_270."<br/>$from_join<br/>".PROFILE_272.$fromext['user_location']."</div></td>";
 				$message = $tp -> toHTML($com['com_message'], true, 'parse_sc, constants');
 				$text .= "<td class='forumheader3' colspan='2' style='vertical-align: top;'>".$message."<hr width='80%' align='left' size='1' noshade ='noshade'>$from_signature</td></tr>
 				<tr><td class='forumheader'><div class='smallblacktext'><a href='".e_SELF."?".e_QUERY."#top' onclick=\"window.scrollTo(0,0);\">".PROFILE_271."</a></div></td><td class='forumheader' colspan='2'><div align='right' class='smallblacktext'><a href='newuser.php?id=".$com['com_by']."&page=comments'>".PROFILE_137a."".$from['user_name']."".PROFILE_137b."</a>";
@@ -848,7 +828,7 @@ if (isset($_GET['page'])) {
 		}
 	} elseif ($_GET['page'] == "images") {
 		if ($pref['profile_pics'] == "ON" || $pref['profile_pics'] == "") {
-			$text .= "<table width='100%'><tr><td class='forumheader'><img src='images/images.png'>".PROFILE_61."</td></tr></table>";
+			$text .= "<table style='".USER_WIDTH."' class='fborder table'><tr><td class='fborder table'><img src='images/images.png'>".PROFILE_61."</td></tr></table>";
 			// IMAGE GALLERY FUNCTIONS
 			define ("MAX_SIZE","100");
 			if ($pref['im_width'] != "") {
@@ -1179,13 +1159,13 @@ if (isset($_GET['page'])) {
 					$online = "";
 				}
 				unset($checkonline,$on_name);
-				$date = date("Y.m.d.   H:i", $com['com_date']);
+				$date = date("Y m d - H:i", $com['com_date']);
 				if ($com['com_date'] >= $userlastvisit) {
 					$newcom = "<font color='#FF0000'>".PROFILE_200."</font>";
 				} else {
 					$newcom = "";
 				}
-				$text .= "<br><table width='100%' class='fborder'>
+				$text .= "<br><table style='".USER_WIDTH."' class='fborder table'>
 					<tr>
 						<td style='width:20%; text-align:left' class='fcaption'>".PROFILE_268."".$from['user_name']."</td>
 						<td style='width:60%; text-align:left' class='fcaption'>".PROFILE_269."</td>
@@ -1198,17 +1178,17 @@ if (isset($_GET['page'])) {
 				// GET COMMENTERS AVATAR
 				if($from[user_image] == "") {
 					$av = "".e_PLUGIN."another_profiles/images/noavatar.png";
-					$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'><img src='".$av."' border='1' ".$avwidth." ".$avheight."  alt='' /></a>";
+					$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'>{SETIMAGE: w=120}{USER_AVATAR: shape=circle}</a>";
 				} else {
 					$av = $from[user_image];
 					require_once(e_HANDLER."avatar_handler.php");
 					$av = avatar($av);
-					$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'><img src='".$av."' border='1' ".$avwidth." ".$avheight."  alt='' /></a>";
+					$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'>{SETIMAGE: w=120}{USER_AVATAR: shape=circle}</a>";
 				}
 				if ($pref['profile_user_warn_support'] == "Yes" AND $fromext['user_warn'] !='null' AND $fromext['user_warn'] !='') {
 					$text .= "<br/><img src=\"".THEME_ABS."images/warn/".$fromext['user_warn'].".png\">";
 				}
-				$text .= "<br/>$from_level<br/><div class='smallblacktext'>".PROFILE_270."$from_join<br/>".PROFILE_272.$fromext['user_location']."</div></td>";
+				$text .= "<br/>$from_level<br/><div class='smallblacktext'>".PROFILE_270."<br/>$from_join<br/>".PROFILE_272.$fromext['user_location']."</div></td>";
 				$message = $tp -> toHTML($com['com_message'], true,  'parse_sc, constants');
 				$text .= "<td class='forumheader3' colspan='2' style='vertical-align: top;'>".$message."<hr width='80%' align='left' size='1' noshade ='noshade'>$from_signature</td></tr>
 				<tr><td class='forumheader'><div class='smallblacktext'><a href='".e_SELF."?".e_QUERY."#top' onclick=\"window.scrollTo(0,0);\">".PROFILE_271."</a></div></td><td class='forumheader' colspan='2'><div align='right' class='smallblacktext'><a href='newuser.php?id=".$com['com_by']."&page=comments'>".PROFILE_137a."".$from['user_name']."".PROFILE_137b."</a>";
@@ -1316,7 +1296,7 @@ if (isset($_GET['page'])) {
 
 				// GALLERY
 				$dir = "userimages/".$id."/".$_GET['album']."/";
-				$text .= "<table width='100%' class='fborder'><tr><td class='forumheader'><i>".$_GET['album']."".PROFILE_275."</i></td></tr></table>";
+				$text .= "<table style='".USER_WIDTH."' class='fborder table'><tr><td class='forumheader'><i>".$_GET['album']."".PROFILE_275."</i></td></tr></table>";
 
 				$text .= "<br/><form action='formhandler.php' method='post'><table width='100%'>";
 				$column = 1;
@@ -1495,7 +1475,7 @@ if (isset($_GET['page'])) {
 					}
 				}
 				if ($totalsize > 0 || $dir_counter > 0){
-					$text .= "<table width='100%' class='fborder'><tr><td class='forumheader'><i>".PROFILE_274."</i></td></tr></table>";
+					$text .= "<table style='".USER_WIDTH."' class='fborder table'><tr><td class='forumheader'><i>".PROFILE_274."</i></td></tr></table>";
 					$text .= "<br/><br/><form method='post' action='formhandler.php'><table width='100%'><tr>";
 					if ($handle = opendir($dir)) {
 						$col = 0;

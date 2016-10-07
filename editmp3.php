@@ -1,31 +1,11 @@
 <?php
-/*
-+---------------------------------------------------------------+
-| Another Profiles Plugin v0.9.6
-| Copyright © 2008 Istvan Csonka
-| http://freedigital.hu
-| support@freedigital.hu
-|
-|        For the e107 website system
-|        ©Steve Dunstan
-|        http://e107.org
-|        jalist@e107.org
-|
-| (The original program is Alternate Profiles v2.0
-| boreded.co.uk)
-|
-| Another Profiles Plugin comes with
-| ABSOLUTELY NO WARRANTY
-| Released under the terms and conditions of the
-| GNU General Public License (http://gnu.org).
-+---------------------------------------------------------------+
-*/
+
 if (!defined('e107_INIT')) { exit; }
 
 if ($pref['profile_mp3enabled'] == "OFF") {
 	Header("Location: newusersettings.php?".$luid." ");
 }
-$text .= "<table width='100%'><tr><td class='forumheader'><img src='images/music.png'>".PROFILE_166."</td></tr></table>";
+$text .= "<table style='".USER_WIDTH."' class='fborder table'><tr><td class='fborder table'><img src='images/music.png'>".PROFILE_166."</td></tr></table>";
 
 $text .= "<form method='POST' enctype='multipart/form-data' action='formhandler.php'>";
 
@@ -33,7 +13,7 @@ $sql->db_Select("another_profiles","user_mp3","user_id=".intval($id)."");
 $row = $sql->db_Fetch();
 
 if ($pref['profile_mp3'] == "Both") {
-	$text .= "<br /><table width='100%'><tr><td class='forumheader'>".PROFILE_154."</td></tr></table>";
+	$text .= "<br /><table style='".USER_WIDTH."' class='fborder table'><tr><td class='fborder table'>".PROFILE_154."</td></tr></table>";
 	if ($row['user_mp3'] == "") {
 		$http = 1;
 		$text .= "<input type='radio' id='select' name='usemp3' value='remote'> ".PROFILE_152."    <input type='radio' id='select' name='usemp3' value='local'> ".PROFILE_153."    <input type='radio' id='select' name='usemp3' value='none' checked> ".PROFILE_159."<br/><br/>";
@@ -44,13 +24,13 @@ if ($pref['profile_mp3'] == "Both") {
 		$http = 1;
 		$text .= "<input type='radio' id='select' name='usemp3' value='remote' checked> ".PROFILE_152."    <input type='radio' id='select' name='usemp3' value='local'> ".PROFILE_153."    <input type='radio' id='select' name='usemp3' value='none'> ".PROFILE_159."<br/><br/>";
 	}
-	$text .= "<table width='100%'><tr><td class='forumheader'>".PROFILE_150."</td></tr></table>";
+	$text .= "<table style='".USER_WIDTH."' class='fborder table'><tr><td class='fborder table'>".PROFILE_150."</td></tr></table>";
 	if ($row['user_mp3'] != "" && $http == 1) {
 		$value = $row['user_mp3'];
 	} else {
-		$value = "http://...";
+		$value = "";
 	}
-	$text .= "<br/><input type='text' class='tbox' size='80' name='remote' value='".$value."'><br/><br/>";
+	$text .= "<br/><input type='text' class='tbox' size='80' name='remote' placeholder='http://...' value='".$value."'><br/><br/>";
 }
 
 if ($pref['profile_mp3'] == "Remote Only") {
@@ -63,19 +43,19 @@ if ($row['user_mp3'] != "" && $http == 1) {
 	$value = $row['user_mp3'];
 	$text .= "<input type='radio' id='select' name='usemp3' value='none'> ".PROFILE_159a."<br/><br/>";
 } else {
-	$value = "http://...";
+	$value = "";
 }
-	$text .= "<br/><table width='100%'><tr><td class='forumheader'>".PROFILE_150a."</td></tr></table>";
-	$text .= "<br/><input type='text' class='tbox' size='80' name='remote' value='".$value."'><br/><br/>";
+	$text .= "<br/><table style='".USER_WIDTH."' class='fborder table'><tr><td class='fborder table'>".PROFILE_150a."</td></tr></table>";
+	$text .= "<br/><input type='text' class='tbox' size='80' name='remote' placeholder='http://...' value='".$value."'><br/><br/>";
 }
 
 if ($pref['profile_mp3'] == "Both") {
-	$text .= "<table width='100%'><tr><td class='forumheader'>".PROFILE_155."</td></tr></table>";
+	$text .= "<table style='".USER_WIDTH."' class='fborder table'><tr><td class='fborder table'>".PROFILE_155."</td></tr></table>";
 }
 
 if ($pref['profile_mp3'] == "Local Only") {
 	$text .= "<input type='radio' id='select' name='usemp3' value='none'> ".PROFILE_159a."<br/><br/>";
-	$text .= "<table width='100%'><tr><td class='forumheader'>".PROFILE_155a."</td></tr></table>";
+	$text .= "<table style='".USER_WIDTH."' class='fborder table'><tr><td class='fborder table'>".PROFILE_155a."</td></tr></table>";
 }
 if ($pref['profile_mp3'] == "Both" || $pref['profile_mp3'] == "Local Only") {
 	$text .= "<br/>".PROFILE_151."<br/><br/><input type='file' class='tbox' name='file_userfile[]' value='".$lvalue."'>";

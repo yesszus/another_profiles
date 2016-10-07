@@ -109,25 +109,30 @@ $display = $sql->db_Fetch();
 if ($display['user_display'] == '') {
 	if($user['user_image'] == "") {
 	$user_image = "".e_PLUGIN."another_profiles/images/noavatar.png";
-	$avatar .= "<img src='".$user_image."' border='1' ".$avwidth." ".$avheight."  alt='' />";
+//	$avatar .= "<img src='".$user_image."' border='1' ".$avwidth." ".$avheight."  alt='' />";
+	$avatar .= "{SETIMAGE: w=120}{USER_AVATAR: shape=circle}";
 	}else{
 	$user_image = $user['user_image'];
 	require_once(e_HANDLER."avatar_handler.php");
 	$user_image = avatar($user_image);
-	$avatar .= "<img src='".$user_image."' border='1' ".$avwidth." ".$avheight." alt='' />";
+//	$avatar .= "<img src='".$user_image."' border='1' ".$avwidth." ".$avheight." alt='' />";
+	$avatar .= "{SETIMAGE: w=120}{USER_AVATAR: shape=circle}";
 	}
 } else {
 	if (file_exists("userimages/".$id."/".$display['user_display']."")) {
 		$avatar .= "<img src='userimages/".$id."/".$display['user_display']."' border='1' width='".$avwidth."' height='".$avheight."' alt='' />";
+		
 	} else {
 		if($user['user_image'] == "") {
 			$user_image = "".e_PLUGIN."another_profiles/images/noavatar.png";
-			$avatar .= "<img src='".$user_image."' border='1' width='".$avwidth."' height='".$avheight."'  alt='' />";
+		//	$avatar .= "<img src='".$user_image."' border='1' width='".$avwidth."' height='".$avheight."'  alt='' />";
+			$avatar .= "{SETIMAGE: w=120}{USER_AVATAR: shape=circle}";
 		}else{
 			$user_image = $user['user_image'];
 			require_once(e_HANDLER."avatar_handler.php");
 			$user_image = avatar($user_image);
-			$avatar .= "<img src='".$user_image."' border='1' width='".$avwidth."' height='".$avheight."' alt='' />";
+		//	$avatar .= "<img src='".$user_image."' border='1' width='".$avwidth."' height='".$avheight."' alt='' />";
+			$avatar .= "{SETIMAGE: w=120}{USER_AVATAR: shape=circle}";
 		}
 	}
 }
@@ -145,7 +150,8 @@ if ($pref['profile_imageheight'] == '') {
 }
 if ($user['user_image'] == "") {
 	$user_image = "".e_PLUGIN."another_profiles/images/noavatar.png";
-	$profil_image .= "<img src='".$user_image."' border='1' ".$avwidth." ".$avheight."  alt='' />";
+//	$profil_image .= "<img src='".$user_image."' border='1' ".$avwidth." ".$avheight."  alt='' />";
+	$profil_image .= "{SETIMAGE: w=120}{USER_AVATAR: shape=circle}";
 } else {
 	$user_image = str_replace("/thumbs/", "/", $user['user_image']);
 	$another_profiles_link = "".SITEURL.e_PLUGIN."another_profiles/";
@@ -167,7 +173,8 @@ if ($user['user_image'] == "") {
 		$imagewidth = $avwidth;
 		$imageheight = $avheight;
 	}
-	$profil_image .= "<img src='".$user_image."' border='1' ".$imagewidth." ".$imageheight." alt='' />";
+	//$profil_image .= "<img src='".$user_image."' border='1' ".$imagewidth." ".$imageheight." alt='' />";
+	$profil_image .= "{SETIMAGE: w=120}{USER_AVATAR: shape=circle}";
 }
 
 // END OF

@@ -1,29 +1,8 @@
 <?php
-/*
-+---------------------------------------------------------------+
-| Another Profiles Plugin v0.9.6
-| Copyright © 2008 Istvan Csonka
-| http://freedigital.hu
-| support@freedigital.hu
-|
-|        For the e107 website system
-|        ©Steve Dunstan
-|        http://e107.org
-|        jalist@e107.org
-|
-| (The original program is Alternate Profiles v2.0
-| boreded.co.uk)
-|
-| Another Profiles Plugin comes with
-| ABSOLUTELY NO WARRANTY
-| Released under the terms and conditions of the
-| GNU General Public License (http://gnu.org).
-+---------------------------------------------------------------+
-*/
 
 if (!defined('e107_INIT')) { exit; }
 require_once("videohandler.php");
-$text .= "<table width='100%'><tr><td class='forumheader'><img src='images/videos.png'>&nbsp;".PROFILE_165."</td></tr></table>";
+$text .= "<table style='".USER_WIDTH."' class='fborder table'><tr><td class='fborder table'><img src='images/videos.png'>&nbsp;".PROFILE_165."</td></tr></table>";
 //$text .= "<br/><form method='POST' action='formhandler.php'>";
 
 $text .= "<script langauge=\"JavaScript\" type=\"text/javascript\">
@@ -74,11 +53,11 @@ if (isset($_GET['addnew'])) {
 		$text .= PROFILE_114." ".$pref['profile_maxnovids'].PROFILE_236;
 	} else {
 		$text .= $error_message;
-		$text .= "<form method='post' name='share_form' action='formhandler.php'><table class='fborder' width='100%'><tr><td class='forumheader' colspan='2'>".PROFILE_225."</td></tr>";
+		$text .= "<form method='post' name='share_form' action='formhandler.php'><table style='".USER_WIDTH."' class='fborder table'><tr><td class='forumheader' colspan='2'>".PROFILE_225."</td></tr>";
 		$text .= "<tr><td style='width: 1%;' class='forumheader3'>".PROFILE_226."</td><td class='forumheader3'><input type='text' style='width:225px' class='tbox' name='title' value=''></td></tr>";
 		$text .= "<tr><td style='width: 1%;' class='forumheader3'>".PROFILE_227."</td><td class='forumheader3'><textarea rows='5' style='width: 99%;' name='description' class='tbox' onselect='storeCaret(this);' onclick='storeCaret(this);' onkeyup='storeCaret(this)'></textarea></td></tr>";
 		$text .= "<tr><td style='width: 1%;' class='forumheader3'>".PROFILE_423."</td><td class='forumheader3'>
-			<select name='share_site' onChange='disp_help_text()' class='tbox' style='width:225px'>".
+			<select name='share_site' onChange='disp_help_text()' class='fborder table' style='width:225px'>".
 			($pref['profile_youtube'] == "ON" ? "<option value='youtube' selected='selected'>YouTube (http://www.youtube.com/)</option>" : "").
 			($pref['profile_vimeo'] == "ON" ? "<option value='vimeo'>Vimeo (http://vimeo.com/)</option>" : "").
 			($pref['profile_indavideo'] == "ON" ? "<option value='indavideo'>Indavideo (http://indavideo.hu/)</option>" : "").
@@ -141,14 +120,14 @@ if (isset($_GET['addnew'])) {
 	}
 
 	$text .= $error_message;
-	$text .= "<table class='fborder' width='100%'><tr><td class='forumheader' colspan='2'>".PROFILE_221."</td></tr>";
+	$text .= "<table style='".USER_WIDTH."' class='fborder table'><tr><td class='forumheader' colspan='2'>".PROFILE_221."</td></tr>";
 	$text .= "<tr><td class='forumheader3'>".PROFILE_226."</td><td class='forumheader3'>";
 			if ($break_yt[2] == "www.youtube.com") {
-				$text .= "<img src='http://img.youtube.com/vi/".$break2_yt[0]."/default.jpg' width='100'><br/>";
+				$text .= "<img src='http://img.youtube.com/vi/".$break2_yt[0]."/default.jpg' width='100'><br/><br/>";
 ///!!!
 			} elseif($share_site != "") {
 				$pic_url = pic_url($share_site,$video);
-				$text .=  "<img src='$pic_url' width='100'><br/>";
+				$text .=  "<img src='$pic_url' width='100'><br/><br/>";
 			} else {
 				$text .= "<img src='images/nopreview.png' title='".PROFILE_267."' width='100'><br/>";
 			}
@@ -159,7 +138,7 @@ if (isset($_GET['addnew'])) {
 	$text .= "</td></tr>";
 	$text .= "<tr><td class='forumheader3'>".PROFILE_227."</td><td class='forumheader3'><textarea rows='5' style='width: 99%;' name='description' class='tbox' onselect='storeCaret(this);' onclick='storeCaret(this);' onkeyup='storeCaret(this)'>".$desc."</textarea></td></tr>";
 	$text .= "<tr><td class='forumheader3'>".PROFILE_423."</td><td class='forumheader3'>
-	<select name='share_site' onChange='disp_help_text()' class='tbox' style='width:225px'>";
+	<select name='share_site' onChange='disp_help_text()' class='border table' style='width:225px'>";
 	if($share_site  == "youtube" && $pref['profile_youtube'] == "ON") {
 		$text .= "<option value='youtube' selected='selected'>YouTube (http://www.youtube.com/)</option>";
 	} elseif($pref['profile_youtube'] == "ON") {
@@ -254,7 +233,7 @@ if (isset($_GET['addnew'])) {
 	if ($vidcomm == 0) {
 		$text .= "<br/><i>".PROFILE_68."</i>";
 	} else {
-		$text .= "<br><table width='100%' class='fborder'><tr><td class='forumheader' colspan='4'><i>".PROFILE_36a." (".$vidnumrows."):</i></td></tr></table>";
+		$text .= "<br><table style='".USER_WIDTH."' class='fborder table'><tr><td class='forumheader' colspan='4'><i>".PROFILE_36a." (".$vidnumrows."):</i></td></tr></table>";
 		$text .= "<br/>";
 		$text .= "<br/><form action='formhandler.php' method='post'>";
 
@@ -293,7 +272,7 @@ if (isset($_GET['addnew'])) {
 			$online = "";
 		}
 		unset($checkonline,$on_name);
-		$date = date("Y.m.d.   H:i", $com['com_date']);
+		$date = date("Y m d - H:i", $com['com_date']);
 		if ($com['com_date'] >= $userlastvisit) {
 			$newcom = "<font color='#FF0000'>".PROFILE_200."</font>";
 		} else {
@@ -312,17 +291,17 @@ if (isset($_GET['addnew'])) {
 		// GET COMMENTERS AVATAR
 		if($from[user_image] == "") {
 			$av = "".e_PLUGIN."another_profiles/images/noavatar.png";
-			$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'><img src='".$av."' border='1' ".$avwidth." ".$avheight."  alt='' /></a>";
+			$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'>{SETIMAGE: w=120}{USER_AVATAR: shape=circle}</a>";
 		} else {
 			$av = $from[user_image];
 			require_once(e_HANDLER."avatar_handler.php");
 			$av = avatar($av);
-			$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'><img src='".$av."' border='1' ".$avwidth." ".$avheight."  alt='' /></a>";
+			$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'>{SETIMAGE: w=120}{USER_AVATAR: shape=circle}</a>";
 		}
 		if ($pref['profile_user_warn_support'] == "Yes" AND $fromext['user_warn'] !='null' AND $fromext['user_warn'] !='') {
 			$text .= "<br/><img src=\"".THEME_ABS."images/warn/".$fromext['user_warn'].".png\">";
 		}
-		$text .= "<br/>$from_level<br/><div class='smallblacktext'>".PROFILE_270."$from_join<br/>".PROFILE_272.$fromext['user_location']."</div></td>";
+		$text .= "<br/>$from_level<br/><div class='smallblacktext'>".PROFILE_270."<br/>$from_join<br/>".PROFILE_272.$fromext['user_location']."</div></td>";
 		$message = $tp -> toHTML($com['com_message'], true, 'parse_sc, constants');
 		$text .= "<td class='forumheader3' colspan='2' style='vertical-align: top;'>".$message."<hr width='80%' align='left' size='1' noshade ='noshade'>$from_signature</td></tr>
 		<tr><td class='forumheader'><div class='smallblacktext'><a href='".e_SELF."?".e_QUERY."#top' onclick=\"window.scrollTo(0,0);\">".PROFILE_271."</a></div></td><td class='forumheader' colspan='2'><div align='right' class='smallblacktext'><a href='newuser.php?id=".$com['com_by']."&page=comments'>".PROFILE_137a."".$from['user_name']."".PROFILE_137b."</a>";
@@ -334,12 +313,12 @@ if (isset($_GET['addnew'])) {
 	}
 // Hozzászólások vége
 		if ($pref['profile_buttontype'] == "Yes") {
-			$text .= "<table width='100%'><tr><td>
+			$text .= "<table style='".USER_WIDTH."' class='fborder table'><tr><td>
 			<input type='hidden' name='uid' value='".$id."'>
 			<input type='hidden' name='vidid' value='".$_GET['vid']."'>
 			<input type='image' name='comment_delete' onmouseover='this.src=\"images/buttons/".e_LANGUAGE."_delete_over.gif\"' onmouseout='this.src=\"images/buttons/".e_LANGUAGE."_delete.gif\"'  src='images/buttons/".e_LANGUAGE."_delete.gif' >";
 		} else {
-			$text .= "<table width='100%'><tr><td>
+			$text .= "<table style='".USER_WIDTH."' class='fborder table'><tr><td>
 			<input type='hidden' name='uid' value='".$id."'>
 			<input type='hidden' name='vidid' value='".$_GET['vid']."'>
 			<input type='submit' name='comment_delete' value='".PROFILE_192."' class='button'>";
@@ -355,8 +334,8 @@ if (isset($_GET['addnew'])) {
 	if ($vids == 0) {
 		$text .= "<br/><i>".PROFILE_119."</i>";
 	} else {
-		$text .= "<table width='100%' class='fborder'><tr><td class='forumheader'><i>".PROFILE_273."</i></td></tr></table>";
-		$text .= "<br><table width='100%'><tr>";
+		$text .= "<table style='".USER_WIDTH."' class='fborder table'><tr><td class='forumheader'><i>".PROFILE_273."</i></td></tr></table>";
+		$text .= "<br><table style='".USER_WIDTH."' class='fborder table'><tr>";
 		$count = 1;
 		for ($i = 0; $i < $vids; $i++) {
 			$vid = $sql->db_Fetch();

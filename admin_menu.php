@@ -1,25 +1,5 @@
 <?php
-/*
-+---------------------------------------------------------------+
-| Another Profiles Plugin v0.9.6.2
-| Copyright © 2008 Istvan Csonka
-| http://freedigital.hu
-| support@freedigital.hu
-|
-|        For the e107 website system
-|        ©Steve Dunstan
-|        http://e107.org
-|        jalist@e107.org
-|
-| (The original program is Alternate Profiles v2.0
-| boreded.co.uk)
-|
-| Another Profiles Plugin comes with
-| ABSOLUTELY NO WARRANTY
-| Released under the terms and conditions of the
-| GNU General Public License (http://gnu.org).
-+---------------------------------------------------------------+
-*/
+
 $eplug_admin = TRUE;
 if(!defined("e107_INIT")) {
 	require_once("../../class2.php");
@@ -657,15 +637,6 @@ function show_main() {
 	<br/><br/><hr/><br/><br/>";
 	return $txt;
 }
-
-////////////////////////////
-function show_update() {
-global $pref;
-/////
-$txt .= "<iframe style='overflow: hidden; border: 0; width: 950px; height: 460px;' src='".e_PLUGIN."another_profiles/admin_vupdate.php' scrolling='no' width='640' height='360'></iframe>";
-return $txt;
-}
-////////////////
 
 function show_main_settings() {
 	global $pref;
@@ -1858,10 +1829,8 @@ function show_menu($action) {
 	$var['memberlist_settings']['link'] = e_SELF."?memberlist_settings";
 	$var['phpinfo']['text'] = ADMIN_PROFILE_104;
 	$var['phpinfo']['link'] = e_SELF."?phpinfo";
-	$var['update']['text'] = PROFILE_428;
-	$var['update']['link'] = e_SELF."?update";
-	
-	show_admin_menu(PROFILE_1, $action, $var);
+		
+	show_admin_menu(PROFILE_1, $action, $var);	
 }
 
 function admin_menu_adminmenu() {

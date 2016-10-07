@@ -1,30 +1,10 @@
 <?php
-/*
-+---------------------------------------------------------------+
-| Another Profiles Plugin v0.9.6
-| Copyright © 2008 Istvan Csonka
-| http://freedigital.hu
-| support@freedigital.hu
-|
-|        For the e107 website system
-|        ©Steve Dunstan
-|        http://e107.org
-|        jalist@e107.org
-|
-| (The original program is Alternate Profiles v2.0
-| boreded.co.uk)
-|
-| Another Profiles Plugin comes with
-| ABSOLUTELY NO WARRANTY
-| Released under the terms and conditions of the
-| GNU General Public License (http://gnu.org).
-+---------------------------------------------------------------+
-*/
+
 if (!defined('e107_INIT')) { exit; }
 
 function pic_url($video_site, $video_code) {
 	if($video_site == "youtube") {
-		$video_pic_url = "http://img.youtube.com/vi/".$video_code."/default.jpg";
+		$video_pic_url = "http://img.youtube.com/vi/".$video_code."/hqdefault.jpg";
 		if(!fopen($video_pic_url, 'r')){
 			$video_pic_url = "images/nopreview.png";
 		}
@@ -44,13 +24,13 @@ function pic_url($video_site, $video_code) {
 		return $video_pic_url;
 	}
 	if($video_site == "indavideo") {
-		$vimeo_url = "http://www.indavideo.hu/video/".$video_code."";
+		$vimeo_url = "http://indavideo.hu/video/".$video_code."";
 		$vimeofile = fopen($vimeo_url, "r");
 		$vimeofiledata = stream_get_contents($vimeofile);
 		$vimeo_content = strpos($vimeofiledata,"content=\"video\"");
 		$vimeo_string = substr($vimeofiledata, $vimeo_content, 200);
 		$vimeo_id_array = explode("\"", $vimeo_string);
-		$video_pic_url = $vimeo_id_array[5];
+		$vimeo_pic_url = $vimeo_id_array[5];
 		if(!fopen($video_pic_url, 'r')){
 			$video_pic_url = "images/nopreview.png";
 		}
@@ -96,7 +76,7 @@ function vid_url($video_site, $video_code) {
 		return $vid_embed_code;
 	}
 	if($video_site == "indavideo") {
-		$vimeo_url = "http://www.indavideo.hu/video/".$video_code."";
+		$vimeo_url = "http://indavideo.hu/video/".$video_code."";
 		$vimeofile = fopen($vimeo_url, "r");
 		$vimeofiledata = stream_get_contents($vimeofile);
 		$vimeo_content = strpos($vimeofiledata,"http://files.indavideo.hu/player/gup.swf?vID=");

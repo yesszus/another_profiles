@@ -1,25 +1,5 @@
 <?php
-/*
-+---------------------------------------------------------------+
-| Another Profiles Plugin v0.9.6
-| Copyright © 2008 Istvan Csonka
-| http://freedigital.hu
-| support@freedigital.hu
-|
-|        For the e107 website system
-|        ©Steve Dunstan
-|        http://e107.org
-|        jalist@e107.org
-|
-| (The original program is Alternate Profiles v2.0
-| boreded.co.uk)
-|
-| Another Profiles Plugin comes with
-| ABSOLUTELY NO WARRANTY
-| Released under the terms and conditions of the
-| GNU General Public License (http://gnu.org).
-+---------------------------------------------------------------+
-*/
+
 if (!defined('e107_INIT')) { exit; }
 require_once(e_PLUGIN."another_profiles/memberlist_template.php");
 require_once(e_PLUGIN."another_profiles/memberlist_shortcodes.php");
@@ -130,7 +110,7 @@ if ($szures != "rate_forums" && $szures != "rate_comments" && $szures != "rate_c
 		// Search form
 		$text = "<div style='text-align:center'>
 			<form action='".e_SELF."' method='get'>
-			<table style='width:100%' class='fborder'>
+			<table style='".USER_WIDTH."' class='fborder table'>
 			<tr>
 			<td style='vertical-align:top;' colspan='2' class='fcaption'>".PROFILE_3a."</td>
 			</tr>";
@@ -664,7 +644,7 @@ if ($szures != "rate_forums" && $szures != "rate_comments" && $szures != "rate_c
 //RATE
 	if($sql->db_rows()==0) {
 		$results = "
-		<table style='width:100%' class='fborder'>
+		<table style='".USER_WIDTH."' class='fborder table'>
 		<tr>
 		<td class='forumheader3' style='text-align:center'><b>".PROFILE_6."</b></td>
 		</tr>
@@ -683,7 +663,7 @@ if ($szures != "rate_forums" && $szures != "rate_comments" && $szures != "rate_c
 	}
 	$text .= "<div style='text-align:center'>
 		<form method='post' action='".e_SELF."?".e_QUERY."'>
-		<table class='fborder' width = '100%'>
+		<table style='".USER_WIDTH."' class='fborder table'>
 		<tr>
 		<td colspan='7' style='text-align:center' class='forumheader'>";
 	if (check_class($pref['profile_top_class'])) {
@@ -749,7 +729,7 @@ if ($szures != "rate_forums" && $szures != "rate_comments" && $szures != "rate_c
 			$text .= "</td></tr></table></form>";
 
 		if ($pref['profile_memberlist_bcard'] == "line" || $pref['profile_memberlist_bcard'] == "" ) {
-			$text .= "<table style='width:100%' class='fborder'><tr>";
+			$text .= "<table style='".USER_WIDTH."' class='fborder table'><tr>";
 			if ($pref['profile_memberlist_class']) {
 				$profile_memberlist_class = $pref['profile_memberlist_class'];
 			} else {
@@ -865,7 +845,7 @@ if ($szures != "rate_forums" && $szures != "rate_comments" && $szures != "rate_c
 				$text .= renderuser($row, "short");
 			}
 		} else {
-			$text .= "<table style='width:100%' class='fborder'><tr>";
+			$text .= "<table style='".USER_WIDTH."' class='fborder table'><tr>";
 			if ($pref['profile_memberlist_class']) {
 				$profile_memberlist_class = $pref['profile_memberlist_class'];
 			} else {
@@ -976,7 +956,7 @@ if ($szures != "rate_forums" && $szures != "rate_comments" && $szures != "rate_c
 			} else {
 				echo "<link href='css/card_".$bcard_css.".css' rel='stylesheet' type='text/css'>";
 			}
-			$text .= "<table id='card_table'><tr>";
+			$text .= "<table style='".USER_WIDTH."' class='fborder table' id='card_table'><tr>";
 			if ($pref['profile_bcard_column'] == '') {
 				$userlist_column = '3';
 			} elseif ($pref['profile_bcard_column'] > '8') {
@@ -1010,7 +990,7 @@ if (!check_class($pref['profile_top_class'])) {
 
 	if($sql->db_rows()==0) {
 		$results = "
-		<table style='width:100%' class='fborder'>
+		<table style='".USER_WIDTH."' class='fborder table'>
 		<tr>
 		<td class='forumheader3' style='text-align:center'><b>".PROFILE_6."</b></td>
 		</tr>
@@ -1074,7 +1054,7 @@ if (!check_class($pref['profile_top_class'])) {
 		}
 		$text .= "<a href='".e_PLUGIN."another_profiles/newuser.php?szures=rate_friends'>".PROFILE_379."</a><br/>";
 	}
-	$text .= "<br/><br/><table width='100%'><tr>";
+	$text .= "<br/><br/><table style='".USER_WIDTH."' class='fborder table'><tr>";
 	$text .= "<td colspan= 3 class='forumheader'>".PROFILE_380.$pref['profile_top_x']."</td>";
 	$text .= "</tr>";
 	if ($pref['profile_memberlist_bcard'] == "line" || $pref['profile_memberlist_bcard'] == "" ) {

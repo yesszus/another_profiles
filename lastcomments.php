@@ -1,25 +1,5 @@
 <?php
-/*
-+---------------------------------------------------------------+
-| Another Profiles Plugin v0.9.6
-| Copyright © 2008 Istvan Csonka
-| http://freedigital.hu
-| support@freedigital.hu
-|
-|        For the e107 website system
-|        ©Steve Dunstan
-|        http://e107.org
-|        jalist@e107.org
-|
-| (The original program is Alternate Profiles v2.0
-| boreded.co.uk)
-|
-| Another Profiles Plugin comes with
-| ABSOLUTELY NO WARRANTY
-| Released under the terms and conditions of the
-| GNU General Public License (http://gnu.org).
-+---------------------------------------------------------------+
-*/
+
 if(!defined("e107_INIT")) {
 	require_once("../../class2.php");
 }
@@ -74,7 +54,7 @@ $pic_td_width = $pref['profile_comments_spy_pic_size'] + 5;
 } else {
 $pic_td_width = 150;
 }
-$text .= "<table width='100%'><tr>";
+$text .= "<table style='".USER_WIDTH."' class='fborder table'><tr>";
 if ($pref['profile_commentson'] == "ON" || $pref['profile_commentson'] == "") {
 	if ($allcomments == "on") {
 		$text .= "<td class='forumheader'><img src='images/comments.png'>&nbsp;&nbsp;&nbsp;<a href='".e_PLUGIN."another_profiles/lastcomments.php?page=all_comments'>".PROFILE_328."</a>";
@@ -203,7 +183,7 @@ if (($pref['profile_commentson'] == "ON" && $comment_type == "prof") || ($pref['
 			$felirat1 = PROFILE_330;
 		}
 
-		$text .= "<table width='100%' class='fborder'><tr><td class='forumheader' colspan='4'><i>".$felirat1." (".$comnumrows_all."):</i></td></tr></table>";
+		$text .= "<table style='".USER_WIDTH."' class='fborder table'><tr><td class='fborder table' colspan='4'><i>".$felirat1." (".$comnumrows_all."):</i></td></tr></table>";
 		for ($i = 0; $i < $comm; $i++) {
 			$com = $sql->db_Fetch();
 			$from = mysql_query("SELECT * FROM ".MPREFIX."user WHERE user_id=".$com['com_by']." ");
@@ -317,13 +297,13 @@ if (($pref['profile_commentson'] == "ON" && $comment_type == "prof") || ($pref['
 				$online = "";
 			}
 			unset($checkonline,$on_name);
-			$date = date("Y.m.d.   H:i", $com['com_date']);
+			$date = date("Y m d - H:i", $com['com_date']);
 			if ($com['com_date'] >= $userlastvisit) {
 				$newcom = "<font color='#FF0000'>".PROFILE_200."</font>";
 			} else {
 				$newcom = "";
 			}
-			$text .= "<br><table width='100%' class='fborder'>
+			$text .= "<br><table style='".USER_WIDTH."' class='fborder table'>
 				<tr>
 					<td style='width:20%; text-align:left' class='fcaption'>".PROFILE_268."".$from['user_name']."</td>
 					<td style='text-align:left' class='fcaption'>".PROFILE_327."";
@@ -356,17 +336,17 @@ if (($pref['profile_commentson'] == "ON" && $comment_type == "prof") || ($pref['
 
 			if($from[user_image] == "") {
 				$av = "".e_PLUGIN."another_profiles/images/noavatar.png";
-				$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'><img src='".$av."' border='1' ".$avwidth." ".$avheight."  alt='' /></a>";
+				$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'>{SETIMAGE: w=120}{USER_AVATAR: shape=circle}</a>";
 			} else {
 				$av = $from[user_image];
 				require_once(e_HANDLER."avatar_handler.php");
 				$av = avatar($av);
-				$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'><img src='".$av."' border='1' ".$avwidth." ".$avheight."  alt='' /></a>";
+				$text .= "".$from['user_customtitle']."<br/><br/><a href='newuser.php?id=".$com['com_by']."'>{SETIMAGE: w=120}{USER_AVATAR: shape=circle}</a>";
 			}
 			if ($pref['profile_user_warn_support'] == "Yes" AND $fromext['user_warn'] !='null' AND $fromext['user_warn'] !='') {
 				$text .= "<br/><img src=\"".THEME_ABS."images/warn/".$fromext['user_warn'].".png\">";
 			}
-			$text .= "<br/>$from_level<br/><div class='smallblacktext'>".PROFILE_270."$from_join<br/>".PROFILE_272.$fromext['user_location']."</div></td>";
+			$text .= "<br/>$from_level<br/><div class='smallblacktext'>".PROFILE_270."<br/>$from_join<br/>".PROFILE_272.$fromext['user_location']."</div></td>";
 			$aof = 0;
 			$no_user_friend_album == "";
 			if (file_exists("userimages/".$to_from['user_id']."/".$dir_neve[0]."/only_friends")) $aof = 1;
@@ -440,7 +420,7 @@ if (($pref['profile_commentson'] == "ON" && $comment_type == "prof") || ($pref['
 			$text .= "</div></td></tr></table><br/><br/>";
 		}
 	}
-$text .= "<table width='100%'><tr><td>";
+$text .= "<table style='".USER_WIDTH."' class='fborder table'><tr><td>";
 $text .= "</td><td><div align='right'>".$prev.$nav.$next."</div></td></tr></table>";
 }
 $display = $tp->parseTemplate($text);

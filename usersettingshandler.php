@@ -383,8 +383,8 @@ require_once("usersettings_1.0.4.php");
 require_once("usersettings_2.0.0 (git).php");
 } else if ($e107info['e107_version'] == '2.1.2 (git)') {
 require_once("usersettings_2.1.2 (git).php");
-} else if ($e107info['e107_version'] == '2.1.2') {
-require_once("usersettings_2.1.2.php");
+} else if ($e107info['e107_version'] == '2.1.3 (git)') {
+require_once("usersettings_2.1.3 (git).php");
 } else if ($e107info['e107_version'] == '0.8.0 (cvs)') {
 	if (isset($_GET['uid'])) {
 		if (ADMIN) {

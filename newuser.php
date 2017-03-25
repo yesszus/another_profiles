@@ -4,12 +4,11 @@ if(!defined("e107_INIT")) {
 	require_once("../../class2.php");
 } 
 
-///////
+/////// V2 compatible
 require_once(e_HANDLER."form_handler.php");
 require_once(e_HANDLER."comment_class.php");
 $user_shortcodes = e107::getScBatch('user');
 ///////
-
 
 //e107_0.8 compatible 
  if(file_exists(e_FILE."shortcode/batch/user_shortcodes.php")){
@@ -280,13 +279,13 @@ if (isset($_GET['id'])) {
 		<td {$main_colspan} style='width:100%' class='forumheader3'><span style='float:left'>{USER_REALNAME_ICON}&nbsp; ".PROFILE_350."</span><span style='float:right; text-align:right'>{USER_REALNAME}</span></td>
 		</TR>";
 	$text .= "<TR>
-		<td  {$main_colspan} style='width:100%' class='forumheader3'><span style='float:left'>{USER_EMAIL_ICON}&nbsp; ".PROFILE_351."</span><span style='float:right; text-align:right'>{USER_EMAIL_LINK}</span></td>
+		<td  {$main_colspan} style='width:100%' class='forumheader3'><span style='float:left'>{USER_EMAIL_ICON}&nbsp; ".PROFILE_351."</span><span style='float:right; text-align:right'>{USER_EMAIL}{USER_EMAIL_LINK}</span></td>
 		</TR>";
 	$text .= "<TR>
 		<td  {$main_colspan} style='width:100%' class='forumheader3'><span style='float:left'>".PROFILE_352.":</span><span style='float:right; text-align:right'>{USER_LEVEL}</span></td>
 		</TR>";
 	$text .= "<TR>
-		<td  {$main_colspan} style='width:100%' class='forumheader3'><span style='float:left'>".PROFILE_353.":&nbsp;&nbsp;</span><span style='float:right; text-align:right'>{USER_LASTVISIT}</span></td>
+		<td  {$main_colspan} style='width:100%' class='forumheader3'><span style='float:left'>".PROFILE_353.":&nbsp;&nbsp;</span><span style='float:right; text-align:right'>{USER_LASTVISIT}<br />{USER_LASTVISIT_LAPSE}</span></td>
 		</TR>";
 	if ($pref['profile_user_warn_support'] == "Yes" AND $sql->db_Select("user_extended", "*", "user_extended_id='$id' AND user_warn!='null' AND user_warn!=''")) {
 	$text .= "<TR>
@@ -294,7 +293,7 @@ if (isset($_GET['id'])) {
 		</TR>";
 	}
 	$text .= "<TR>
-		<td  {$main_colspan} style='width:100%' class='forumheader3'><span style='float:left'>".PROFILE_354.":&nbsp;&nbsp;</span><span style='float:right; text-align:right'>{USER_JOIN}</td>
+		<td  {$main_colspan} style='width:100%' class='forumheader3'><span style='float:left'>".PROFILE_354.":&nbsp;&nbsp;</span><span style='float:right; text-align:right'>{USER_JOIN}<br />{USER_DAYSREGGED}</td>
 		</TR>";
 			
 	$text .= "<TR>

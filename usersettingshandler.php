@@ -380,11 +380,17 @@ require_once("usersettings_1.0.3.php");
 } else if ($e107info['e107_version'] == '1.0.4') {
 require_once("usersettings_1.0.4.php");
 } else if ($e107info['e107_version'] == '2.0.0 (git)') {
-require_once("usersettings_2.0.0 (git).php");
+require_once("usersettings_2.0.0_(git).php");
 } else if ($e107info['e107_version'] == '2.1.2 (git)') {
-require_once("usersettings_2.1.2 (git).php");
+require_once("usersettings_2.1.2_(git).php");
 } else if ($e107info['e107_version'] == '2.1.3 (git)') {
-require_once("usersettings_2.1.3 (git).php");
+require_once("usersettings_2.1.3_(git).php");
+} else if ($e107info['e107_version'] == '2.1.4 (git)') {
+require_once("usersettings_2.1.4_(git).php");
+} else if ($e107info['e107_version'] == '2.1.5 (git)') {
+require_once("usersettings_2.1.5_(git).php");
+} else if ($e107info['e107_version'] == '2.1.6 (git)') {
+require_once("usersettings_2.1.6_(git).php");
 } else if ($e107info['e107_version'] == '0.8.0 (cvs)') {
 	if (isset($_GET['uid'])) {
 		if (ADMIN) {

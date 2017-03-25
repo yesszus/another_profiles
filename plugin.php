@@ -247,9 +247,12 @@ if(!function_exists("another_profiles_install")) {
 	unlink(e_PLUGIN."another_profiles/usersettings_1.0.2.php");
 	unlink(e_PLUGIN."another_profiles/usersettings_1.0.3.php");
 	unlink(e_PLUGIN."another_profiles/usersettings_1.0.4.php");
-	unlink(e_PLUGIN."another_profiles/usersettings_2.0.0 (git).php");
-	unlink(e_PLUGIN."another_profiles/usersettings_2.1.2 (git).php");
-	unlink(e_PLUGIN."another_profiles/usersettings_2.1.3 (git).php");
+	unlink(e_PLUGIN."another_profiles/usersettings_2.0.0_(git).php");
+	unlink(e_PLUGIN."another_profiles/usersettings_2.1.2_(git).php");
+	unlink(e_PLUGIN."another_profiles/usersettings_2.1.3_(git).php");
+	unlink(e_PLUGIN."another_profiles/usersettings_2.1.4_(git).php");
+	unlink(e_PLUGIN."another_profiles/usersettings_2.1.5_(git).php");
+	unlink(e_PLUGIN."another_profiles/usersettings_2.1.6_(git).php");
 	unlink(e_PLUGIN."another_profiles/useredit_0.8.0.php");
 	unlink(e_PLUGIN."another_profiles/usersettings_0.8.0.php");
     }
@@ -280,9 +283,12 @@ if(!function_exists("another_profiles_upgrade")) {
 	unlink(e_PLUGIN."another_profiles/usersettings_1.0.2.php");
 	unlink(e_PLUGIN."another_profiles/usersettings_1.0.3.php");
 	unlink(e_PLUGIN."another_profiles/usersettings_1.0.4.php");
-	unlink(e_PLUGIN."another_profiles/usersettings_2.0.0 (git).php");
-	unlink(e_PLUGIN."another_profiles/usersettings_2.1.2 (git).php");
-	unlink(e_PLUGIN."another_profiles/usersettings_2.1.3 (git).php");
+	unlink(e_PLUGIN."another_profiles/usersettings_2.0.0_(git).php");
+	unlink(e_PLUGIN."another_profiles/usersettings_2.1.2_(git).php");
+	unlink(e_PLUGIN."another_profiles/usersettings_2.1.3_(git).php");
+	unlink(e_PLUGIN."another_profiles/usersettings_2.1.4_(git).php");
+	unlink(e_PLUGIN."another_profiles/usersettings_2.1.5_(git).php");
+	unlink(e_PLUGIN."another_profiles/usersettings_2.1.6_(git).php");
 	unlink(e_PLUGIN."another_profiles/useredit_0.8.0.php");
 	unlink(e_PLUGIN."another_profiles/usersettings_0.8.0.php");
     }
